@@ -1,0 +1,23 @@
+Metric,Value,Unit,Audio,Method,Status,Notes
+WER,UNAVAILABLE,%,all audio,Whisper large-v3,UNAVAILABLE,No reference transcripts available
+CER,UNAVAILABLE,%,all audio,Whisper large-v3,UNAVAILABLE,No reference transcripts available
+Whisper_model,large-v3,,N/A,faster-whisper,VERIFIED,Primary model; fallback chain: medium->small->base
+Whisper_model_size_params,"~1,550,000,000",params,N/A,OpenAI,VERIFIED (public spec),External model
+Compute_type_CPU,int8,,N/A,faster-whisper,VERIFIED,CTranslate2 quantized inference
+Beam_size,5,,N/A,faster-whisper,VERIFIED,From pipeline/lyrics.py
+VAD_filter,False,,N/A,faster-whisper,VERIFIED,Disabled to preserve held singing notes
+No_speech_threshold,0.85,,N/A,faster-whisper,VERIFIED,Segments above this probability skipped
+Word_prob_threshold,0.10,,N/A,faster-whisper,VERIFIED,Words below this discarded
+Condition_on_previous,False,,N/A,faster-whisper,VERIFIED,Prevents hallucination loops in singing
+Initial_prompt,Song lyrics singing vocals music,,N/A,faster-whisper,VERIFIED,Biases towards lyric-style output
+Lyric_phrases_204s,38,phrases,converted-audio-ShZ978fBl6Y (204s),Whisper large-v3,MEASURED,From outputs JSON
+Lyric_words_204s,0,words,converted-audio-ShZ978fBl6Y (204s),Whisper large-v3,MEASURED,Word timestamps not available in this run (lyrics_model=None in that run)
+Lyric_coverage_204s_pct,33.2,%,converted-audio-ShZ978fBl6Y (204s),Whisper large-v3,MEASURED,last phrase end 68.06s / 204.8s duration
+First_phrase_start_204s,0.37,seconds,converted-audio-ShZ978fBl6Y (204s),Whisper large-v3,MEASURED,
+Last_phrase_end_204s,68.06,seconds,converted-audio-ShZ978fBl6Y (204s),Whisper large-v3,MEASURED,
+Detected_language_test5s,en,,test_audio.wav (synthetic 5s),Whisper large-v3,MEASURED,prob=0.19 (expected: low for synthetic audio)
+Lyric_phrases_test5s,1,phrases,test_audio.wav (synthetic 5s),Whisper large-v3,MEASURED,1 phrase: 'singing vocals' (0.0-0.96s) — Whisper hallucination on synthetic noise
+Word_count_test5s,0,words,test_audio.wav (synthetic 5s),Whisper large-v3,MEASURED,No word timestamps returned for synthetic noise
+Vocal_source_selection,Center-Channel Extraction (CCE),,all audio (no UNet checkpoint),DSP fallback,VERIFIED,pipeline/lyrics.py: unet_has_checkpoint=False -> extract_center_vocal_dsp()
+Resampling_target_sr,16000,Hz,N/A,faster-whisper,VERIFIED,Audio resampled to 16kHz before ASR
+WER_accuracy_status,UNAVAILABLE,,all audio,Whisper large-v3,UNAVAILABLE,No lyric ground truth for MUSDB18; no reference for converted-audio file

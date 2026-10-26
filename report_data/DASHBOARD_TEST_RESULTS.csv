@@ -1,0 +1,30 @@
+Field,Value,Audio,Status,Notes
+Gradio_version,6.28.0,N/A,VERIFIED (pip show),Installed; app.py uses gr.Blocks with Soft theme
+Dashboard_file,app/app.py,N/A,VERIFIED,~400 lines; full Gradio v4 UI
+Pipeline_backend,chordify.py Chordify class,N/A,VERIFIED,Singleton _pipeline instance
+UI_tabs,8,N/A,VERIFIED,Guitar Tab / Synchronized View / Chords / Beats / Sections / Lyrics / Word Timestamps / Diagnostics
+Timeline_plot,YES,N/A,VERIFIED,matplotlib figure; 2-row (sections + chords) colored timeline
+Metadata_table,YES,N/A,VERIFIED,Duration / BPM / Key / Chord engine / Beat engine / Lyrics model / Chord segments / Lyric phrases / Words / Coverage
+Word_timestamps_tab,YES,N/A,VERIFIED,Per-word start/end/probability table
+Diagnostics_tab,YES,N/A,VERIFIED,"Coverage warnings, pipeline metrics"
+Neural_DSP_badges,YES,N/A,VERIFIED,Green/yellow badge in metadata
+Dashboard_live_test,NOT EXECUTED,N/A,UNAVAILABLE,Cannot run Gradio server in agentic environment; all code verification done statically
+Gradio_server_port,7860,N/A,VERIFIED,Default; tries 7860-7869 range
+Share_option,YES,--share flag,VERIFIED,Public Gradio link available via --share
+Audio_formats_supported,.wav / .mp3 / .flac,N/A,VERIFIED,From utils/audio.py SUPPORTED_EXTENSIONS
+Test_audio_duration,5.0s,test_audio.wav,MEASURED (Test 19),
+Test_audio_chord_method,dsp_chroma,test_audio.wav,MEASURED (Test 19),No ChordNet checkpoint
+Test_audio_beat_method,dsp_librosa,test_audio.wav,MEASURED (Test 19),No BeatNet checkpoint
+Test_audio_lyrics_model,Whisper (large-v3),test_audio.wav,MEASURED (Test 19),
+Test_audio_key,A,test_audio.wav,MEASURED (Test 19),
+Test_audio_bpm,123.0,test_audio.wav,MEASURED (Test 19),
+Test_audio_chord_segments,1,test_audio.wav,MEASURED (Test 19),1 chord (Am) spanning entire 5s
+Test_audio_beat_events,7,test_audio.wav,MEASURED (Test 19),
+Test_audio_downbeats,3,test_audio.wav,MEASURED (Test 19),
+Test_audio_sections,1,test_audio.wav,MEASURED (Test 19),'outro' — random weight artifact from SegmentNet
+Test_audio_pitch_frames,216,test_audio.wav,MEASURED (Test 19),All MIDI=100 — random weight constant output
+Test_audio_lyric_phrases,1,test_audio.wav,MEASURED (Test 19),'singing vocals' (hallucination on synthetic audio)
+Test_audio_lyric_words,0,test_audio.wav,MEASURED (Test 19),No word timestamps for synthetic
+Test_audio_tab_sections,1,test_audio.wav,MEASURED (Test 19),1 chord event in tab
+Test_audio_tab_lines,16,test_audio.wav,MEASURED (Test 19),16-line ASCII tab file
+Test_audio_total_runtime,32.5s,test_audio.wav,MEASURED (Test 19),

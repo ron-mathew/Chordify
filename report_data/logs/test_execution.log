@@ -1,0 +1,48 @@
+Chordify Test Suite Execution Log
+=================================
+Date: 2026-10-21
+Command: python scripts/test_pipeline.py
+Working Dir: C:\Users\RON MATHEW\Desktop\sem7\MAI\Chordify
+Python: 3.13.5
+Platform: Windows win32, CPU only (CUDA not available)
+
+--- STDOUT ---
+[TEST] 1 - Import all modules                        [PASS] PASSED
+[TEST] 2 - Generate synthetic audio                  [PASS] PASSED
+[TEST] 3 - STFT / iSTFT round-trip                   [PASS] PASSED
+[TEST] 4 - UNets forward pass                        [PASS] PASSED
+[TEST] 5 - BeatNet forward pass                      [PASS] PASSED
+[TEST] 6 - ChordNet forward pass                     [PASS] PASSED
+[TEST] 7 - SegmentNet forward pass                   [PASS] PASSED
+[TEST] 8 - PitchNet forward pass                     [PASS] PASSED
+[TEST] 9 - Label integrity                           [PASS] PASSED
+[TEST] 10 - Key detection (diatonic scoring)         [PASS] PASSED    Key: G, score: 8
+[TEST] 11 - Timestamp utilities                      [PASS] PASSED
+[TEST] 12 - Multimodal fusion (synthetic)            [PASS] PASSED    2 beats | 1 chord segment | 1 section | 1 lyric segment
+[TEST] 13 - AI tab generation (synthetic)            [PASS] PASSED    4 chord events; 'e|' present in ascii_tab
+[TEST] 14 - Config loading                           [PASS] PASSED    sample_rate=44100, n_channel=2, sources=4
+[TEST] 15 - DSP chord fallback (chroma)              [PASS] PASSED
+[TEST] 16 - DSP beat fallback (librosa)              [PASS] PASSED
+[TEST] 17 - Automatic fallback selection (ChordNet)  [PASS] PASSED    key=Bb, score=7, method=dsp_chroma
+[TEST] 18 - Automatic fallback selection (BeatNet)   [PASS] PASSED    BPM=68.0, method=dsp_librosa
+[TEST] 19 - End-to-End fallback integration          [PASS] PASSED    BPM=123.0, key=A, 7 beats, 1 chord, time=32.5s
+
+CHORDIFY TEST SUMMARY
+========================================================
+  19 passed   0 failed   19 total
+========================================================
+
+--- WARNINGS ---
+librosa UserWarning: n_fft=1024 is too large for input signal of length=690 (in DSP beat test)
+    -> Benign; occurs only on very short synthetic audio in Test 16
+
+--- EXIT CODE ---
+0
+
+--- IMPORTANT NOTES ---
+All 19 tests pass. However:
+- Tests 1-18 use random-weight neural models or synthetic audio only.
+- Test 19 uses the real Chordify.analyze() pipeline on a 5s synthetic sine wave.
+- PASSING THESE TESTS IS NOT EVIDENCE OF CHORD/BEAT/PITCH ACCURACY.
+- Historical result in CHORDIFY_STATUS.md shows 14.1s for same test without Whisper (before faster-whisper was installed).
+- Current result (32.5s) is slower because Whisper large-v3 model loads on first run.

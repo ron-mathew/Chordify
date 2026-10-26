@@ -1,0 +1,69 @@
+{
+  "project": "Chordify \u2014 AI-Based Multimodal Music Understanding and Automatic Guitar Tab Generation",
+  "audit_date": "2026-10-21",
+  "auditor": "Kiro (AI Code Auditor)",
+  "environment": {
+    "os": "Windows (win32)",
+    "python": "3.13.5",
+    "torch": "2.14.0+cpu",
+    "torchaudio": "2.11.0",
+    "librosa": "1.0.0",
+    "numpy": "2.2.6",
+    "scipy": "1.16.1",
+    "gradio": "6.28.0",
+    "faster_whisper": "1.2.1",
+    "soundfile": "0.14.0",
+    "pyyaml": "6.0.2",
+    "musdb": "0.4.3",
+    "stempeg": "0.2.6",
+    "transformers": "NOT INSTALLED",
+    "cuda": "NOT AVAILABLE"
+  },
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "name": "Test Suite Execution",
+      "command": "python scripts/test_pipeline.py",
+      "date": "2026-10-21",
+      "result": "19/19 PASS",
+      "runtime_s": 35,
+      "output_file": "report_data/logs/test_execution.log"
+    },
+    {
+      "id": "EXP-002",
+      "name": "Model Parameter Counting",
+      "method": "torch parameter counting via model instantiation",
+      "date": "2026-10-21",
+      "results": {
+        "UNets": "39,294,876",
+        "BeatNet": "504,713,475",
+        "ChordNet": "389,342,202",
+        "PitchNet": "119,440,806",
+        "SegmentNet": "14,025,676"
+      }
+    },
+    {
+      "id": "EXP-003",
+      "name": "Dataset File Scan",
+      "method": "os.stat on *.stem.mp4 files (no audio decoding, ffmpeg unavailable)",
+      "date": "2026-10-21",
+      "results": {
+        "train_tracks": 100,
+        "test_tracks": 50,
+        "train_total_gb": 3.43,
+        "test_total_gb": 1.87
+      }
+    },
+    {
+      "id": "EXP-004",
+      "name": "Real Audio Output Inspection",
+      "method": "JSON output inspection from outputs/ directory",
+      "date": "2026-10-21",
+      "files_inspected": [
+        "outputs/test_audio/test_audio_chordify.json",
+        "outputs/converted-audio-ShZ978fBl6Y/converted-audio-ShZ978fBl6Y_chordify.json",
+        "outputs/converted-audio-ShZ978fBl6Y_[cut_75sec]/converted-audio-ShZ978fBl6Y_[cut_75sec]_chordify.json"
+      ]
+    }
+  ]
+}

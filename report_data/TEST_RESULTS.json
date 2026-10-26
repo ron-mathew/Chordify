@@ -1,0 +1,172 @@
+{
+  "run_date": "2026-10-21",
+  "command": "python scripts/test_pipeline.py",
+  "python_version": "3.13.5",
+  "total_tests": 19,
+  "passed": 19,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": "approx 35 (dominated by Test 19 which loads Whisper large-v3)",
+  "test_categories": {
+    "unit": 14,
+    "integration": 4,
+    "e2e": 1,
+    "synthetic": "Tests 1-18 use synthetic or minimal audio only",
+    "real_audio_accuracy": "NONE \u2014 no ground-truth accuracy evaluation"
+  },
+  "important_note": "All tests pass. Tests 1-18 use random-weight neural models or synthetic audio. PASSING THESE TESTS IS NOT EVIDENCE OF CHORD/BEAT/PITCH ACCURACY. Accuracy metrics require trained checkpoints and ground-truth annotations.",
+  "tests": [
+    {
+      "test_id": 1,
+      "name": "Import all modules",
+      "category": "unit",
+      "status": "PASS",
+      "description": "Imports torch, torchaudio, librosa, all model classes, utils, and pipeline stages",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 2,
+      "name": "Generate synthetic audio",
+      "category": "unit",
+      "status": "PASS",
+      "description": "gen_audio(duration=3) returns (2, 132300) tensor at 44100 Hz",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 3,
+      "name": "STFT / iSTFT round-trip",
+      "category": "unit",
+      "status": "PASS",
+      "description": "stft on (2,44100) input gives (2,T,2049) complex tensor; istft reconstructs (2, samples)",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 4,
+      "name": "UNets forward pass",
+      "category": "unit",
+      "status": "PASS",
+      "description": "UNets(sources=4) on (1,2,64,2048) gives (1,4,2,64,2048); mask sum = 1.0",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 5,
+      "name": "BeatNet forward pass",
+      "category": "unit",
+      "status": "PASS",
+      "description": "BeatNet on (1,3,2,64,2048) gives beats=(1,64), logits=(1,64,2048)",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 6,
+      "name": "ChordNet forward pass",
+      "category": "unit",
+      "status": "PASS",
+      "description": "ChordNet on (1,2,64,2048) gives chords=(1,64) with values in [0,121]",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 7,
+      "name": "SegmentNet forward pass",
+      "category": "unit",
+      "status": "PASS",
+      "description": "SegmentNet on (1,2,64,2048) gives segs=(1,64) with values in [0,9]",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 8,
+      "name": "PitchNet forward pass",
+      "category": "unit",
+      "status": "PASS",
+      "description": "PitchNet on (1,2,64,2048) gives pitch=(1,64) with values in [0,849]",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 9,
+      "name": "Label integrity",
+      "category": "unit",
+      "status": "PASS",
+      "description": "len(CHORD_LABELS)==122, len(SEGMENT_LABELS)==10; 'C:maj' in CHORD_LABELS; 'chorus' in SEGMENT_LABELS",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 10,
+      "name": "Key detection (diatonic scoring)",
+      "category": "unit",
+      "status": "PASS",
+      "description": "search_key(['G','Am','C','D','G','Em','C','D']) returns key='G', score=8",
+      "evidence": "verified 2026-10-21 (key=G, score=8 printed in test output)"
+    },
+    {
+      "test_id": 11,
+      "name": "Timestamp utilities",
+      "category": "unit",
+      "status": "PASS",
+      "description": "beat_frames_to_events, chord_frames_to_segments, pitch_frames_to_events all produce correct output",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 12,
+      "name": "Multimodal fusion (synthetic)",
+      "category": "integration",
+      "status": "PASS",
+      "description": "fuse() on synthetic data produces dict with metadata/beats/chords/sections/timeline keys",
+      "evidence": "verified 2026-10-21; printed: 2 beats | 1 chord segments | 1 sections | 1 lyric segments"
+    },
+    {
+      "test_id": 13,
+      "name": "AI tab generation (synthetic)",
+      "category": "integration",
+      "status": "PASS",
+      "description": "generate_tabs() on synthetic fusion result with G/Em/C/D chords produces ascii_tab with 'e|' string notation",
+      "evidence": "verified 2026-10-21; printed: 4 chord events"
+    },
+    {
+      "test_id": 14,
+      "name": "Config loading",
+      "category": "unit",
+      "status": "PASS",
+      "description": "Loads config.yaml; verifies sample_rate=44100, n_channel=2, sources=4",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 15,
+      "name": "DSP chord fallback (chroma)",
+      "category": "unit",
+      "status": "PASS",
+      "description": "estimate_chords_dsp on 4s A-minor triad tone produces non-empty frame labels and chord events with source='dsp_chroma'",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 16,
+      "name": "DSP beat fallback (librosa)",
+      "category": "unit",
+      "status": "PASS",
+      "description": "estimate_beats_dsp on 4s pulse train produces BPM in [50,220] and monotonically increasing timestamps",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 17,
+      "name": "Automatic fallback selection (ChordNet)",
+      "category": "integration",
+      "status": "PASS",
+      "description": "run_chord_analysis with nonexistent checkpoint returns method='dsp_chroma'",
+      "evidence": "verified 2026-10-21; key=Bb, score=7"
+    },
+    {
+      "test_id": 18,
+      "name": "Automatic fallback selection (BeatNet)",
+      "category": "integration",
+      "status": "PASS",
+      "description": "run_beat_analysis with nonexistent checkpoint returns method='dsp_librosa' with BPM=68.0",
+      "evidence": "verified 2026-10-21"
+    },
+    {
+      "test_id": 19,
+      "name": "End-to-End fallback integration",
+      "category": "e2e",
+      "status": "PASS",
+      "description": "Full Chordify.analyze() on outputs/test_audio.wav with no checkpoints; uses DSP fallback for chords and beats; Whisper large-v3 for lyrics",
+      "evidence": "verified 2026-10-21; runtime=32.5s; BPM=123.0; key=A; 7 beats; 1 chord segment; 'e|' in ascii tab"
+    }
+  ]
+}

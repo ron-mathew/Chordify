@@ -1,0 +1,46 @@
+{
+  "dataset_name": "MUSDB18",
+  "dataset_source": "https://sigsep.github.io/datasets/musdb.html",
+  "license": "Creative Commons (various, non-commercial research)",
+  "format": "Stem MP4 (STEM format, 5 sub-tracks: mixture, drums, bass, other, vocals)",
+  "sample_rate_hz": 44100,
+  "channels": 2,
+  "splits": {
+    "train": {
+      "tracks": 100,
+      "total_size_gb": 3.43,
+      "avg_size_mb": 35.1,
+      "min_size_mb": 2.0,
+      "max_size_mb": 96.4,
+      "estimated_duration_min": 350.0,
+      "duration_note": "ESTIMATED \u2014 ffmpeg/stempeg unavailable; approx 3.5 min/track based on MUSDB18 dataset documentation"
+    },
+    "test": {
+      "tracks": 50,
+      "total_size_gb": 1.869,
+      "avg_size_mb": 38.3,
+      "min_size_mb": 11.7,
+      "max_size_mb": 66.0,
+      "estimated_duration_min": 175.0,
+      "duration_note": "ESTIMATED \u2014 same basis"
+    }
+  },
+  "totals": {
+    "total_tracks": 150,
+    "total_size_gb": 5.298,
+    "estimated_total_duration_min": 525.0
+  },
+  "stem_names": [
+    "mixture",
+    "drums",
+    "bass",
+    "other",
+    "vocals"
+  ],
+  "stems_per_track": 5,
+  "annotation_type": "Multi-track separated stems (no chord/beat labels in MUSDB18)",
+  "chord_annotations": "UNAVAILABLE \u2014 MUSDB18 provides source separation stems only, not chord labels",
+  "beat_annotations": "UNAVAILABLE \u2014 MUSDB18 provides stems only",
+  "training_status": "Models NOT trained \u2014 no training code was executed. Checkpoints do not exist.",
+  "actual_use_in_pipeline": "Present for EDA analysis and future training capability. No training executed."
+}

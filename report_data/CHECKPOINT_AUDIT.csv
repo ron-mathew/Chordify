@@ -1,0 +1,8 @@
+Model,Expected_Path,File_Exists,File_Size,Valid_Checkpoint,Notes
+UNets (source separation),checkpoints/unet.pth,NO,N/A,NO,checkpoints/ directory does not exist
+BeatNet,checkpoints/beat_net.pth,NO,N/A,NO,checkpoints/ directory does not exist
+ChordNet,checkpoints/chord_net.pth,NO,N/A,NO,checkpoints/ directory does not exist
+PitchNet,checkpoints/pitch_net.pth,NO,N/A,NO,checkpoints/ directory does not exist
+SegmentNet,checkpoints/segment_net.pth,NO,N/A,NO,checkpoints/ directory does not exist
+Whisper large-v3,~/.cache/huggingface/hub/ or ~/.cache/faster_whisper/,YES (cached),~3.09 GB,YES,"External model, downloaded by faster-whisper automatically"
+Wav2Vec2 base-960h,~/.cache/huggingface/hub/,CONDITIONAL,~360 MB,CONDITIONAL,Downloaded by transformers on first use; transformers package not fully installed

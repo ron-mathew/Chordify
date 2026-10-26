@@ -1,0 +1,11 @@
+Metric,Value,Audio,Status,Notes
+Raw_pitch_accuracy,UNAVAILABLE,all audio,UNAVAILABLE,No trained PitchNet checkpoint; no melody annotations in MUSDB18
+Voicing_accuracy,UNAVAILABLE,all audio,UNAVAILABLE,
+Num_pitch_frames_204s,8820,events,converted-audio-ShZ978fBl6Y (204s),MEASURED,From outputs JSON; all frames map to MIDI 100 (random weights)
+Num_pitch_frames_75s,3217,events,converted-audio-ShZ978fBl6Y_[cut_75sec] (74.7s),MEASURED,
+Num_pitch_frames_5s_synthetic,216,events,test_audio.wav (5s synthetic),MEASURED,216 frames at 43.07 fps for 5s
+Pitch_class_range,0-849,index,N/A,VERIFIED (Test 8),850 classes; index->MIDI: 21 + idx//10; cents: (idx%10)*10
+MIDI_note_range,21-105,MIDI note,N/A,VERIFIED,A0 (21) to A7 (105) via 85 semitones
+Pitch_frame_rate,43.07,fps,N/A,DERIVED,44100/1024 hop_length
+PitchNet_checkpoint_status,MISSING,,N/A,VERIFIED,Random weights; all frames output same class (constant output = random weight artifact)
+Constant_pitch_output,"MIDI=100, cents_offset=90",,all output files,MEASURED,PitchNet with random weights outputs constant prediction = class 799 -> MIDI 100 (E7)

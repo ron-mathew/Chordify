@@ -1,0 +1,8 @@
+Model,Architecture,Input_Shape,Output_Shape,Num_Classes,Total_Params,Trainable_Params,Source
+UNets,4x parallel U-Net encoder-decoder with channel-wise softmax,"(batch,2,time,freq)","(batch,4,2,time,freq)",4 stems,"39,294,876","39,294,876",Lamucal (ported)
+BeatNet,3-branch factorised axial-attention transformer,"(batch,3,2,time,freq)","(batch,time) + (batch,time,freq)",3 (none/beat/downbeat),"504,713,475","504,713,475",Lamucal (ported)
+ChordNet,Single BaseTransformer + linear head,"(batch,2,time,freq)","(batch,time) + (batch,time,freq)",122,"389,342,202","389,342,202",Lamucal (ported)
+PitchNet,PitchEmbedding + PitchEncoder + lyric-conditioned decoder,"(batch,2,time,freq)","(batch,time)",850 (85 semitones x 10 centbins),"119,440,806","119,440,806",Lamucal (ported)
+SegmentNet,SegmentEmbeddings + BaseTransformer + linear head,"(batch,2,time,freq)","(batch,time)",10,"14,025,676","14,025,676",Lamucal (ported)
+Whisper large-v3,Encoder-decoder ASR transformer (OpenAI),"(audio, float32, 16kHz)",segments+words with timestamps,Multilingual ASR,"~1,550,000,000 (external)",N/A,OpenAI / faster-whisper
+Wav2Vec2 base-960h,Self-supervised speech encoder (Facebook),"(audio, float32, 16kHz)","(batch,time,768)",Feature extractor,"~94,000,000 (external)",N/A,Meta / HuggingFace

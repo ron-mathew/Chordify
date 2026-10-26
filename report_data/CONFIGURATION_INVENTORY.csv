@@ -1,0 +1,66 @@
+Parameter,Value,Unit,Source,Notes
+sample_rate,44100,Hz,config/config.yaml,Target SR for all audio I/O
+n_channel,2,channels,config/config.yaml,Stereo
+sources,4,stems,config/config.yaml,vocal/bass/drums/other
+n_fft,4096,samples,config/config.yaml,FFT window size
+hop_length,1024,samples,config/config.yaml,STFT hop; frame_rate = 44100/1024 = 43.07 fps
+n_time,256,frames,config/config.yaml,Sliding window chunk size for U-Net
+pad,True,,config/config.yaml,Hann-window zero-padding in STFT
+freq_bins_total,2049,bins,derived: n_fft//2+1,Full STFT output size
+freq_bins_model_input,2048,bins,derived: n_fft//2,Half-spectrum used by all neural models
+frame_rate,43.07,fps,derived: 44100/1024,Frames per second of spectrogram
+unet.conv_n_filters,"[16, 32, 64, 128, 256, 512]",,config.yaml:separate.model,6 encoder levels
+unet.down_activation,ELU,,config.yaml,
+unet.up_activation,ELU,,config.yaml,
+beat.source,3,stems,config.yaml:beat.model,drums+bass+other
+beat.n_classes,3,classes,config.yaml,"0=no-beat, 1=beat, 2=downbeat"
+beat.weights,"[0.4, 0.3, 0.3]",,config.yaml,drum/bass/other stem weights
+beat.n_freq,2048,bins,config.yaml,
+beat.n_group,32,groups,config.yaml,Factorised attention groups
+beat.f_layers,2,,config.yaml,Frequency encoder layers
+beat.f_nhead,4,,config.yaml,Frequency attention heads
+beat.t_layers,2,,config.yaml,Time encoder layers
+beat.t_nhead,4,,config.yaml,Time attention heads
+beat.d_layers,2,,config.yaml,Decoder layers
+beat.d_nhead,8,,config.yaml,Decoder attention heads
+beat.dropout,0.5,,config.yaml,
+chord.n_freq,2048,bins,config.yaml,
+chord.n_classes,122,classes,config.yaml,Full chord vocabulary
+chord.n_group,32,groups,config.yaml,
+chord.f_layers,5,,config.yaml,
+chord.f_nhead,8,,config.yaml,
+chord.t_layers,5,,config.yaml,
+chord.t_nhead,8,,config.yaml,
+chord.d_layers,5,,config.yaml,
+chord.d_nhead,8,,config.yaml,
+chord.dropout,0.5,,config.yaml,
+pitch.n_freq,2048,bins,config.yaml,
+pitch.n_channel,2,channels,config.yaml,
+pitch.n_classes,850,classes,config.yaml,85 semitones x 10 centbins
+pitch.emb_hidden,16,,config.yaml,PitchEmbedding hidden dim
+pitch.wr,0.3,,config.yaml,Lyric conditioning weight
+pitch.pr,0.02,,config.yaml,Positional encoding scale
+pitch.enc_weights,"[0.6, 0.4]",,config.yaml,Freq/time encoder blend
+pitch.d_layers,2,,config.yaml,
+pitch.d_nhead,8,,config.yaml,
+segment.n_freq,2048,bins,config.yaml,
+segment.n_channel,2,channels,config.yaml,
+segment.n_classes,10,classes,config.yaml,Structural sections
+segment.emb_hidden,128,,config.yaml,SegmentEmbeddings hidden dim
+segment.d_model_after_embed,512,bins,derived: 2048//4,After freq/4 pooling
+lyrics.whisper_model,large-v3,,config.yaml,Primary model; fallbacks: medium/small/base
+lyrics.wav2vec2_model,facebook/wav2vec2-base-960h,,config.yaml,For PitchNet conditioning matrix
+lyrics.beam_size,5,,pipeline/lyrics.py,Whisper beam search width
+lyrics.vad_filter,False,,pipeline/lyrics.py,VAD disabled for singing
+lyrics.no_speech_threshold,0.85,,pipeline/lyrics.py,Skip segments above this
+lyrics.word_prob_threshold,0.10,,pipeline/lyrics.py,Filter low-confidence words
+dsp.n_chord_templates,24,templates,pipeline/dsp_fallback.py,12 major + 12 minor
+dsp.viterbi_gamma,14.0,,pipeline/dsp_fallback.py,Temperature scaling
+dsp.self_transition_log,0.0,,pipeline/dsp_fallback.py,Strong self-transition bias
+dsp.other_transition_log,-3.0,,pipeline/dsp_fallback.py,Transition penalty
+dsp.chroma_fusion_weights,"[0.65, 0.35]",,pipeline/dsp_fallback.py,Full/bass chroma blend
+dsp.min_segment_dur,1.0,seconds,pipeline/dsp_fallback.py,Minimum chord segment length
+dsp.bpm_halftime_threshold,135.0,BPM,pipeline/dsp_fallback.py,Above this -> divide by 2
+tabs.chord_voicings_count,70,voicings,pipeline/tabs.py (count of _CHORD_VOICINGS keys),Standard guitar positions
+tabs.bars_per_line,4,bars,pipeline/tabs.py,Tab display layout
+tabs.col_width,10,chars,pipeline/tabs.py,Column width per bar

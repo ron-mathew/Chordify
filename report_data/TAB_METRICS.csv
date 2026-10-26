@@ -1,0 +1,13 @@
+Metric,Value,Audio,Status,Notes
+Num_tab_chord_events_204s,30,events,converted-audio-ShZ978fBl6Y (204s),MEASURED,One tab entry per DSP chord segment
+Num_tab_sections_204s,187,lines in tab file,converted-audio-ShZ978fBl6Y (204s),MEASURED,187-line ASCII tab file
+Num_tab_chord_events_75s,12,events,converted-audio-ShZ978fBl6Y_[cut_75sec] (74.7s),MEASURED,
+Num_tab_lines_75s,57,lines,converted-audio-ShZ978fBl6Y_[cut_75sec],MEASURED,
+Tab_chord_events_5s_synthetic,1,events,test_audio.wav (5s synthetic),MEASURED,1 chord segment -> 1 tab event
+Chord_voicings_in_dictionary,70,voicings,N/A,VERIFIED,Count of entries in _CHORD_VOICINGS dict in pipeline/tabs.py
+Valid_string_fret_format,YES,,N/A,VERIFIED (Test 13),'e|' present in all ascii_tab outputs
+Tab_layout_bars_per_line,4,bars/line,N/A,VERIFIED,_build_measure_tab() BARS_PER_LINE=4
+Column_width_chars,10,chars/bar,N/A,VERIFIED,COL_W=10 in pipeline/tabs.py
+Unplayable_voicings,ESTIMATED NONE,,N/A,ESTIMATED,All voicings manually set in dictionary; 'x' marks muted strings
+Musical_accuracy_vs_reference,UNAVAILABLE,,all audio,UNAVAILABLE,Tabs are derived from DSP chord output; no reference guitar tabs
+Chord_tab_agreement,100%,%,all audio,VERIFIED,Tabs are directly generated from chord_segments; perfect agreement by construction

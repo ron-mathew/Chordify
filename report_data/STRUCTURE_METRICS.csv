@@ -1,0 +1,9 @@
+Metric,Value,Audio,Status,Notes
+Boundary_precision,UNAVAILABLE,all audio,UNAVAILABLE,No trained SegmentNet checkpoint; no structure annotations in MUSDB18
+Boundary_recall,UNAVAILABLE,all audio,UNAVAILABLE,
+Boundary_F1,UNAVAILABLE,all audio,UNAVAILABLE,
+Num_sections_204s,1,converted-audio-ShZ978fBl6Y (204s),MEASURED,Single 'chorus' section for entire song — random weight artifact
+Num_sections_75s,1,converted-audio-ShZ978fBl6Y_[cut_75sec] (74.7s),MEASURED,Same pattern
+Num_sections_5s_synthetic,1,test_audio.wav (5s synthetic),MEASURED,'outro' label — random weight artifact
+Section_label_space,10,classes,N/A,VERIFIED,start/end/intro/outro/verse/chorus/solo/break/bridge/inst
+SegmentNet_checkpoint_status,MISSING,,N/A,VERIFIED,Random weights; outputs are meaningless for accuracy evaluation

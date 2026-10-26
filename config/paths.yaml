@@ -1,0 +1,34 @@
+# ============================================================
+# Chordify Path Configuration
+# Use this file to set local paths without hardcoding them
+# into source code.
+# ============================================================
+
+# Root directory of this Chordify project
+# Leave as empty string to auto-detect (recommended).
+# Override with absolute path if needed, e.g.:
+#   project_root: "C:/Users/YourName/Desktop/sem7/MAI/Chordify"
+project_root: ""
+
+# Dataset root (MUSDB18 .stem.mp4 files)
+# If empty, defaults to <project_root>/data
+dataset_root: ""
+
+# Directory where trained / downloaded checkpoints are stored
+# If empty, defaults to <project_root>/checkpoints
+checkpoints_dir: ""
+
+# Output directory for pipeline results
+outputs_dir: ""
+
+# ============================================================
+# Checkpoint file names
+# Set the filename (relative to checkpoints_dir) for each
+# model once checkpoints are available.
+# ============================================================
+checkpoints:
+  unet: "unet.pth"
+  beat: "beat_net.pth"
+  chord: "chord_net.pth"
+  pitch: "pitch_net.pth"
+  segment: "segment_net.pth"

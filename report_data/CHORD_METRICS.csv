@@ -1,0 +1,22 @@
+Metric,Value,Unit,Audio,Method,Status,Notes
+Chord_recognition_accuracy,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,No trained ChordNet checkpoint; no ground-truth chord annotations in MUSDB18
+Frame_wise_chord_accuracy,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,Same reason
+Chord_precision,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,
+Chord_recall,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,
+Chord_F1,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,
+Weighted_CSR,UNAVAILABLE,%,all audio,neural,UNAVAILABLE,
+DSP_num_chord_segments,30,segments,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,Actual output from outputs/converted-audio-ShZ978fBl6Y_chordify.json
+DSP_avg_chord_duration,6.83,seconds,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,Mean segment duration from 30 chord segments
+DSP_min_chord_duration,2.23,seconds,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,
+DSP_max_chord_duration,25.54,seconds,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,
+DSP_N_chord_segments,1,segments,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,1 of 30 segments labelled N
+DSP_N_chord_pct,3.3,%,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,
+DSP_unique_chords,9,distinct chords,converted-audio-ShZ978fBl6Y (204s),dsp_chroma,MEASURED,"F:maj, A#:maj, N, F:min, F#:maj, C:min, G:maj, D#:maj, G:min"
+DSP_detected_key,Bb,,converted-audio-ShZ978fBl6Y (204s),dsp_chroma+KS,MEASURED,Krumhansl-Schmuckler correlation
+DSP_key_score,9,diatonic fit score,converted-audio-ShZ978fBl6Y (204s),dsp_chroma+KS,MEASURED,
+DSP_chord_segments_75s_clip,12,segments,converted-audio-ShZ978fBl6Y_[cut_75sec] (74.7s),dsp_chroma,MEASURED,
+DSP_detected_key_75s,Bb,,converted-audio-ShZ978fBl6Y_[cut_75sec],dsp_chroma+KS,MEASURED,Consistent key across clips
+DSP_key_score_75s,8,diatonic fit score,converted-audio-ShZ978fBl6Y_[cut_75sec],dsp_chroma+KS,MEASURED,
+DSP_chroma_template_count,24,templates,N/A,dsp_chroma,VERIFIED,12 Major + 12 Minor L2-normalized chroma templates
+DSP_viterbi_temperature,14.0,,N/A,dsp_chroma,VERIFIED,gamma parameter in estimate_chords_dsp()
+Chord_accuracy_against_reference,UNAVAILABLE,,all audio,both,UNAVAILABLE,No reference chord annotations exist in this dataset

@@ -1,0 +1,5 @@
+Audio_Duration_s,File_Size_KB,Device,Separation_method,Chord_method,Beat_method,Lyrics_model,Total_Time_s,RT_Factor,Notes
+5.0,861,CPU,U-Net (random weights),dsp_chroma,dsp_librosa,Whisper large-v3,32.5,6.5x,Test 19 measured 2026-10-21; single run
+5.0,861,CPU,U-Net (random weights),dsp_chroma,dsp_librosa,Whisper (large-v3),14.1,2.82x,Historical result from CHORDIFY_STATUS.md (before Whisper was installed); no Whisper overhead
+204.788,~50000 (estimated),CPU,U-Net (random weights),dsp_chroma,dsp_librosa,"Whisper large-v3 (partial, lyrics_model=None in that run)",UNMEASURED,N/A,Output exists but pipeline runtime not captured
+74.688,~25000 (estimated),CPU,U-Net (random weights),dsp_chroma,dsp_librosa,Whisper large-v3 (partial),UNMEASURED,N/A,Same

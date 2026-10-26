@@ -1,0 +1,13 @@
+Metric,Stem,Value,Method,Status,Notes
+SDR,vocals,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,No trained checkpoint; no reference stems for evaluation audio
+SDR,bass,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,Same reason
+SDR,drums,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,Same reason
+SDR,other,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,Same reason
+SI-SDR,vocals,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,
+SIR,vocals,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,
+SAR,vocals,UNAVAILABLE,U-Net (random weights),UNAVAILABLE,
+Separation_runtime_5s_audio,~0.5-1.0,seconds,"U-Net (random weights, CPU)",ESTIMATED,Based on total pipeline runtime and proportion of U-Net pass
+UNet_checkpoint_status,MISSING,,N/A,VERIFIED,No checkpoints/ directory; model runs with random weights
+Mask_sum_property,1.0,,architecture,VERIFIED (Test 4),Softmax across source dimension guarantees energy conservation
+Stems_output_shape,"(4, 2, samples)",,architecture,VERIFIED (Test 4),vocal/bass/drums/other stereo stems
+CCE_vocal_fallback,Active,,pipeline/lyrics.py,VERIFIED,extract_center_vocal_dsp() used for ASR when U-Net is untrained

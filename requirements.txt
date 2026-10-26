@@ -1,0 +1,32 @@
+# ============================================================
+# Chordify — Python Dependencies
+# ============================================================
+# Core deep learning
+torch==2.2.2
+torchaudio==2.2.2
+
+# Audio I/O
+soundfile==0.12.1
+librosa==0.10.2
+resampy==0.4.3
+
+# Config
+PyYAML==6.0.1
+
+# Lyrics / ASR  (optional — lyrics stage degrades gracefully without these)
+openai-whisper==20240930
+transformers==4.41.2
+
+# Dataset handling
+musdb==0.4.2
+stempeg==0.2.3
+
+# EDA / visualisation
+numpy==1.26.4
+matplotlib==3.9.0
+scipy==1.13.1
+jupyter==1.0.0
+ipykernel==6.29.4
+
+# Web UI  (optional — app/ stage)
+gradio==4.37.1
